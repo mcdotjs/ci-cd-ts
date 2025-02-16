@@ -21,3 +21,19 @@ jobs:
 
       - name: Building ...
         run: npm run build
+
+  job_id:
+    steps:
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
+
+    - name: 'Build and push docker image to google registry'
+      run: 'gcloud builds submit --tag us-central1-docker.pkg.dev/sigma-comfort-451119-k2/notely-ar-repo/notely:latest'
