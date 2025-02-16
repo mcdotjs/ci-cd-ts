@@ -25,6 +25,9 @@ jobs:
         run: npm run build
 
   job_id:
+    name: Authenticate gcloud
+    runs-on: ubuntu-latest
+
     steps:
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
